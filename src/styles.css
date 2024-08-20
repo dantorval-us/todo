@@ -12,6 +12,12 @@
   box-sizing: border-box;
 }
 
+html {
+  /* estos dos colores mientras no se solucione https://github.com/angular/components/issues/4190#issuecomment-1067757630 */
+  --mdc-filled-text-field-error-active-indicator-color: var(--secondary-color);
+  --mdc-filled-text-field-error-focus-active-indicator-color: var(--secondary-color);
+}
+
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
@@ -21,6 +27,8 @@ body {
   align-items:  center;
   height: 100vh;
   background-color: var(--fondo);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 header {
@@ -41,12 +49,12 @@ header {
 
 main {
   grid-area: main;
-  padding-top: 10vh;
+  padding: 7vh 0;
   display: flex;
   justify-content: center;
 }
 
-.container {
+.app-container {
   display: grid;
   grid-template-rows: auto 1fr;
   width: 100vw;
@@ -56,4 +64,25 @@ main {
     "main";
 }
 
+.mat-accent.mat-mdc-checkbox {
+  --mdc-checkbox-selected-focus-icon-color: var(--secondary-color);
+  --mdc-checkbox-selected-icon-color: var(--secondary-color);
+}
 
+.tarea-details-form 
+  .mat-mdc-form-field-subscript-wrapper, 
+  .mat-mdc-form-field-bottom-align::before {
+  display: none;
+}
+
+.mat-mdc-button {
+  color: var(--secondary-color) !important;
+}
+
+.cancel-button {
+  color: var(--danger-color) !important;
+}
+
+.cancel-button.mat-mdc-button .mat-mdc-button-persistent-ripple::before {
+  background-color: var(--danger-color);
+}

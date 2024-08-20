@@ -1,0 +1,31 @@
+<div class="tarea-details-container">
+  @if (editNombre) {
+    <form [formGroup]="tareaForm" class="tarea-details-form">
+      <mat-form-field>
+        <mat-label>Tarea</mat-label>
+        <input matInput formControlName="nombre" #nombreTarea>
+        <button mat-icon-button matSuffix (click)="toggleEditNombre()">
+          <mat-icon>check</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+
+    <!-- Para que el ancho sea consistente en ambos casos -->
+    <div class="cabecera ocultar">
+      <h2 mat-dialog-title>{{ nombre }}</h2>
+    </div>
+  } @else {
+    <div class="cabecera" (click)="toggleEditNombre(); enfocarTareaInput()">
+      <h2 mat-dialog-title>{{ nombre }}</h2>
+      <mat-icon>edit</mat-icon>
+    </div>
+  }
+
+  <!-- <mat-dialog-content>
+  </mat-dialog-content> -->
+
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button mat-dialog-close class="cancel-button">Cancelar</button>
+    <button mat-button [mat-dialog-close]="tareaForm.value" (click)="handleUpdate()">Aceptar</button>
+  </mat-dialog-actions>
+</div>

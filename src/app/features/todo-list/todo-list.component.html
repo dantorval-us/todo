@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>{{ titulo | uppercase }}</h2>
+  
+  <form [formGroup]="tareaForm" (ngSubmit)="handleSubmit()">
+    <mat-form-field class="mat-form-field">
+      <input 
+        matInput
+        formControlName="nombre" 
+        placeholder="Añade una tarea"
+        #nombreTarea
+      >
+
+      <button type="submit" mat-icon-button matSuffix>
+        <mat-icon>add</mat-icon>
+      </button>
+
+      @if (tareaForm.get('nombre')?.hasError('whiteSpaceOnly')
+          && !tareaForm.get('nombre')?.hasError('required')) {
+        <mat-error>No puedes añadir <strong>únicamente espacios en blanco</strong>.</mat-error>
+      }
+    </mat-form-field>
+  </form>
+
+  @for (tarea of tareas; track tarea.id) {
+    <app-tarea 
+      [tarea]="tarea"
+      class="tarea"
+      (tareaEliminada)="updateList()"
+    />
+  } @empty {
+    <br>
+    <span>¡No tienes tareas pendientes!</span>
+  }
+
+</div>
+

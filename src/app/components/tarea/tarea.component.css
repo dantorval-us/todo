@@ -1,0 +1,72 @@
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: 
+    "checkbox tarea botones-container";
+
+  &:hover .botones-container {
+    display: inline-block;
+  }
+}
+
+.checkbox {
+  grid-area: checkbox;
+  display: block;
+  align-items: center;
+  overflow: hidden; 
+  width: 100%;
+}
+
+.tarea {
+  display: block;
+  position: relative;
+  font-size: 1rem;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 365px;
+  transition: color 0.5s ease;
+}
+
+.tarea-completada {
+  color: rgb(175, 175, 175);
+}
+
+.botones-container {
+  grid-area: botones-container;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s ease-in-out;
+}
+
+.edit-button {
+  color: var(--secondary-color);
+}
+
+.delete-button {
+  color: var(--danger-color);
+}
+
+.container:hover .botones-container {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Animacion tachar tarea */
+.tarea::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  background-color: black;
+  width: 0;
+  transform-origin: left center;
+  transition: width 0.5s ease;
+  pointer-events: none;
+}
+
+.tarea-completada::after {
+  width: 100%;
+}

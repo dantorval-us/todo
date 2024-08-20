@@ -1,0 +1,23 @@
+<div class="container">
+  <mat-checkbox 
+    [(ngModel)]="tarea.completada"
+    (click)="handleCheck()"
+    class="checkbox"
+  >
+    <span [class.tarea-completada]="tarea.completada" class="tarea">
+      {{ tarea.nombre }}
+    </span>
+  </mat-checkbox>
+  &nbsp;&nbsp;&nbsp;
+
+  <div class="botones-container">
+    <button mat-icon-button class="edit-button" (click)="openDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button mat-icon-button class="delete-button" (click)="handleDelete(tarea.id)"    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+

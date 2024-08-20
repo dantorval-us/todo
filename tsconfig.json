@@ -3,8 +3,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/app/components/*"],
+      "@features/*": ["src/app/features/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@services/*": ["src/app/services/*"],
+      "@shared/*": ["src/app/shared/*"],
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "useDefineForClassFields": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
