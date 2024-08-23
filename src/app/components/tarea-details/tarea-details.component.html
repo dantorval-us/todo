@@ -3,7 +3,7 @@
     <form [formGroup]="tareaForm" class="tarea-details-form">
       <mat-form-field>
         <mat-label>Tarea</mat-label>
-        <input matInput formControlName="nombre" #nombreTarea>
+        <input matInput id="nombreTarea" formControlName="nombre">
         <button mat-icon-button matSuffix (click)="toggleEditNombre()">
           <mat-icon>check</mat-icon>
         </button>

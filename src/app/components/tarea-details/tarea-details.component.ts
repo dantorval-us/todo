@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -26,8 +26,6 @@ export class TareaDetailComponent {
     nombre: [this.nombre],
   });
 
-  @ViewChild('nombreTarea') nombreTarea!: ElementRef<HTMLInputElement>;
-
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -52,7 +50,7 @@ export class TareaDetailComponent {
 
   enfocarTareaInput(): void {
     setTimeout(() => {
-      this.nombreTarea.nativeElement.focus();
+      document.getElementById("nombreTarea")?.focus();
     });
   }
 
