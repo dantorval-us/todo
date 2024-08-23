@@ -86,3 +86,7 @@ main {
 .cancel-button.mat-mdc-button .mat-mdc-button-persistent-ripple::before {
   background-color: var(--danger-color);
 }
+
+.mat-mdc-button[disabled], .mat-mdc-button.mat-mdc-button-disabled {
+  color: #afafaf !important;
+}

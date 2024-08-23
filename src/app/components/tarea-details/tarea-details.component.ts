@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, SimpleChanges, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -20,6 +20,7 @@ export class TareaDetailComponent {
   data = inject(MAT_DIALOG_DATA);
   nombre = this.data.nombre;
   editNombre: boolean = false;
+  inputVacio: boolean = false;
 
   tareaForm = this.formBuilder.group({
     nombre: [this.nombre],
@@ -29,15 +30,24 @@ export class TareaDetailComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  handleUpdate() {
-    this.nombre = this.tareaForm.get('nombre')!.value;
+  ngOnInit() {
+    this.tareaForm.get('nombre')?.valueChanges.subscribe(value => {
+      this.inputVacio = !value.trim().length;
+    });
   }
 
-  toggleEditNombre() {
-    if(this.editNombre == true) {
-      this.handleUpdate();
+  handleUpdate() {
+    this.nombre = this.tareaForm.get('nombre')!.value.trim();
+    this.tareaForm.setValue({nombre: this.nombre});
+  }
+
+  toggleEditNombre() { 
+    if (this.tareaForm.get('nombre')!.value.trim().length) {
+      if (this.editNombre) {
+        this.handleUpdate();
+      }
+      this.editNombre = !this.editNombre;
     }
-    this.editNombre = !this.editNombre;
   }
 
   enfocarTareaInput(): void {

@@ -26,6 +26,12 @@
 
   <mat-dialog-actions class="mat-dialog-actions">
     <button mat-button mat-dialog-close class="cancel-button">Cancelar</button>
-    <button mat-button [mat-dialog-close]="tareaForm.value" (click)="handleUpdate()">Aceptar</button>
+    <button mat-button 
+      [mat-dialog-close]="tareaForm.value" 
+      (click)="handleUpdate()" 
+      [disabled]="inputVacio"
+    >
+      Aceptar
+    </button>
   </mat-dialog-actions>
 </div>
