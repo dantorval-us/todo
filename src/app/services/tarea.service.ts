@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Tarea } from '../interfaces/tarea';
-import { TAREAS } from '../tareas-data-mock';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TareaService {
 
-  tareas: Tarea[] = TAREAS;
+  tareas: Tarea[] = [];
 
   constructor() { }
 
