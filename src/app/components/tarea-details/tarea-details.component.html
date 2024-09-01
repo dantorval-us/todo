@@ -13,6 +13,7 @@
     <!-- Para que el ancho sea consistente en ambos casos -->
     <div class="cabecera ocultar">
       <h2 mat-dialog-title>{{ nombre }}</h2>
+      <mat-icon>edit</mat-icon>
     </div>
   } @else {
     <div class="cabecera" (click)="toggleEditNombre(); enfocarTareaInput()">
