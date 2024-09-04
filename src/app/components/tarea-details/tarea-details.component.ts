@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -24,6 +25,8 @@ export class TareaDetailComponent implements OnInit {
   inputVacio: boolean = false;
   tareaForm!: FormGroup;
 
+  private readonly _destroyRef = inject(DestroyRef);
+
   constructor(
     private _formBuilder: FormBuilder,
     private _tareaService: TareaService
@@ -31,10 +34,7 @@ export class TareaDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this._buildForm();
-
-    this.tareaForm.get('nombre')?.valueChanges.subscribe(value => {
-      this.inputVacio = !value.trim().length;
-    });
+    this._comprobarNombreValido();
   }
 
   private _buildForm(): void {
@@ -43,11 +43,11 @@ export class TareaDetailComponent implements OnInit {
     });
   }
 
-  handleUpdate() {
+  handleUpdate(): void {
     this._tareaService.updateTarea(this._data.id, this.tareaForm.value);
   }
 
-  toggleEditNombre() { 
+  toggleEditNombre(): void { 
     if (this.tareaForm.get('nombre')!.value.trim().length) {
       if (this.editNombre) {
         this.nombre = this.tareaForm.get('nombre')!.value.trim();
@@ -61,6 +61,14 @@ export class TareaDetailComponent implements OnInit {
     setTimeout(() => {
       document.getElementById("nombreTarea")?.focus();
     });
+  }
+
+  private _comprobarNombreValido(): void {
+    this.tareaForm.get('nombre')?.valueChanges
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(value => {
+        this.inputVacio = !value.trim().length;
+      });
   }
 
 }

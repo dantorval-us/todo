@@ -28,7 +28,7 @@ export class TodoListComponent implements OnInit {
   titulo: string = "Mis tareas";
   tareas!: Tarea[];
 
-  tareaForm = this._formBuilder.nonNullable.group({
+  tareasForm = this._formBuilder.nonNullable.group({
     nombre: ['', [Validators.required, noWithespaceValidator()]],
   });
 
@@ -46,9 +46,7 @@ export class TodoListComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.nombreTarea.nativeElement.focus();
-    });
+    this._enfocarTareasInput();
   }
 
   getTareas():void {
@@ -61,11 +59,17 @@ export class TodoListComponent implements OnInit {
   }
 
   handleSubmit(): void {
-    if (this.tareaForm.valid) {
-      const nuevaTarea = this.tareaForm.value;
+    if (this.tareasForm.valid) {
+      const nuevaTarea = this.tareasForm.value;
       this._tareaService.addTarea(nuevaTarea);
     }
-    this.tareaForm.reset();
+    this.tareasForm.reset();
+  }
+
+  private _enfocarTareasInput(): void {
+    setTimeout(() => {
+      this.nombreTarea.nativeElement.focus();
+    });
   }
 
 }

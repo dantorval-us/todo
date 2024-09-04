@@ -1,7 +1,7 @@
 <div class="container">
   <h2>{{ titulo | uppercase }}</h2>
   
-  <form [formGroup]="tareaForm" (ngSubmit)="handleSubmit()">
+  <form [formGroup]="tareasForm" (ngSubmit)="handleSubmit()">
     <mat-form-field class="mat-form-field">
       <input 
         matInput
@@ -14,8 +14,8 @@
         <mat-icon>add</mat-icon>
       </button>
 
-      @if (tareaForm.get('nombre')?.hasError('whiteSpaceOnly')
-          && !tareaForm.get('nombre')?.hasError('required')) {
+      @if (tareasForm.get('nombre')?.hasError('whiteSpaceOnly')
+          && !tareasForm.get('nombre')?.hasError('required')) {
         <mat-error>No puedes añadir <strong>únicamente espacios en blanco</strong>.</mat-error>
       }
     </mat-form-field>
