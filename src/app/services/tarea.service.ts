@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { addDoc, collection, collectionData, deleteDoc, doc, DocumentData, DocumentReference, Firestore, orderBy, query, updateDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Tarea } from '../interfaces/tarea';
 
 @Injectable({
@@ -6,19 +8,39 @@ import { Tarea } from '../interfaces/tarea';
 })
 export class TareaService {
 
-  tareas: Tarea[] = [];
+  private readonly _tareasCollection = collection(this._firestore, 'tareas');
 
-  constructor() { }
+  constructor(private _firestore: Firestore) { }
 
-  getTareas(): Tarea[] {
-    return this.tareas;
+  addTarea(tarea: Partial<Tarea>): Promise<DocumentReference<DocumentData, DocumentData>> {
+    return addDoc(this._tareasCollection, {
+      fechaCreacion: Date.now(),
+      completada: false,
+      ...tarea
+    });
   }
 
-  checkTarea(tareaId: string): void {
-    // TODO
+  getTareas(): Observable<Tarea[]> {
+    const q = query(this._tareasCollection, orderBy('fechaCreacion', 'asc'));
+    return collectionData(q, {idField: 'id'}) as Observable<Tarea[]>;
+  }
+
+  updateTarea(tareaId: string, tarea: Tarea): void {
+    const tareaRef = this._getDocRef(tareaId);
+    updateDoc(tareaRef, { ...tarea });
+  }
+
+  checkTarea(tareaId: string, nuevoEstado: boolean): void {
+    const tareaRef = this._getDocRef(tareaId);
+    updateDoc(tareaRef, { completada: nuevoEstado }); 
   }
 
   deleteTarea(tareaId: string): void {
-    this.tareas = this.tareas.filter(tarea => tarea.id !== tareaId);
+    const tareaRef = this._getDocRef(tareaId);
+    deleteDoc(tareaRef);
+  }
+
+  private _getDocRef(tareaId: string) {
+    return doc(this._firestore, 'tareas', tareaId);
   }
 }

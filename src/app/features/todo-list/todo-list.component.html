@@ -21,15 +21,21 @@
     </mat-form-field>
   </form>
 
-  @for (tarea of tareas; track tarea.id) {
-    <app-tarea 
-      [tarea]="tarea"
-      class="tarea"
-      (tareaEliminada)="updateList()"
-    />
-  } @empty {
-    <br>
-    <span>¡No tienes tareas pendientes!</span>
+  @defer {
+    @for (tarea of tareas; track tarea.id) {
+      <app-tarea 
+        [tarea]="tarea"
+        class="tarea"
+      />
+    } @empty {
+      <br>
+      <span>¡No tienes tareas pendientes!</span>
+    }
+  }
+  @loading (minimum 700ms) {
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
   }
 
 </div>

@@ -67,6 +67,7 @@ main {
 .mat-accent.mat-mdc-checkbox {
   --mdc-checkbox-selected-focus-icon-color: var(--secondary-color);
   --mdc-checkbox-selected-icon-color: var(--secondary-color);
+  --mdc-checkbox-selected-hover-icon-color: var(--secondary-color);
 }
 
 .tarea-details-form 
@@ -89,4 +90,9 @@ main {
 
 .mat-mdc-button[disabled], .mat-mdc-button.mat-mdc-button-disabled {
   color: #afafaf !important;
+}
+
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, 
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--secondary-color) !important;
 }

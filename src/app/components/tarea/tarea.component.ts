@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -19,24 +19,23 @@ const MATERIAL_MODULE = [FormsModule, MatCheckboxModule, MatIconModule, MatButto
 export class TareaComponent {
 
   @Input() tarea!: Tarea;
-  @Output() tareaEliminada = new EventEmitter<string>();
 
   dialog = inject(MatDialog);
 
-  constructor(private tareaService: TareaService) {}
+  constructor(private _tareaService: TareaService) {}
 
   handleCheck(): void  {
-    this.tareaService.checkTarea(this.tarea.id);
+    this._tareaService.checkTarea(this.tarea.id, this.tarea.completada);
   }
 
   handleDelete(tareaId: string): void {
-    this.tareaService.deleteTarea(tareaId);
-    this.tareaEliminada.emit(tareaId);
+    this._tareaService.deleteTarea(tareaId);
   }
 
-  openDialog() {
+  openDialog(): void {
     const dialogRef = this.dialog.open(TareaDetailComponent, {
       data: {
+        id: this.tarea.id,
         nombre: this.tarea.nombre
       },
       autoFocus: false 
