@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="cabecera">
+    {{ mensajeCabecera }}
+  </div>
+
+  <div class="temporizador">
+    {{ tiempoRestante | timeFormat }}
+  </div>
+
+  <div class="botonera">
+    @if (!this.suscripcionTemporizador) {
+      <button (click)="iniciarTemporizador()" [disabled]="playDeshabilitado">play</button>
+    } @else {
+      <button (click)="detenerTemporizador()">stop</button>
+    }
+    <button (click)="reiniciarTemporizador()" [disabled]="playDeshabilitado">reset</button>
+  </div>
+
+  <div class="opciones">
+    <button (click)="setValorInicial(1800); setMensajeCabecera('30 minutos')">30 minutos</button>
+    <button (click)="setValorInicial(2700); setMensajeCabecera('45 minutos')">45 minutos</button>
+    <button (click)="setValorInicial(3600); setMensajeCabecera('1 hora')">1 hora</button>
+    <button (click)="openDialogTemporizadorPersonalizado()">Personalizado</button>
+  </div>
+
+</div>
