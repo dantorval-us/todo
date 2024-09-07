@@ -1,27 +1,38 @@
 <div class="container">
 
-  <div class="cabecera">
+  <div class="cabecera" [ngClass]="{ 'oculto': mensajeCabecera === '-' }">
     {{ mensajeCabecera }}
   </div>
 
-  <div class="temporizador">
+  <div class="temporizador" (click)="openDialogTemporizadorPersonalizado()">
     {{ tiempoRestante | timeFormat }}
   </div>
 
   <div class="botonera">
     @if (!this.suscripcionTemporizador) {
-      <button (click)="iniciarTemporizador()" [disabled]="playDeshabilitado">play</button>
+      <button mat-mini-fab (click)="iniciarTemporizador()" [disabled]="playDeshabilitado">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
     } @else {
-      <button (click)="detenerTemporizador()">stop</button>
+      <button mat-mini-fab (click)="detenerTemporizador()">
+        <mat-icon>pause</mat-icon>
+      </button>
     }
-    <button (click)="reiniciarTemporizador()" [disabled]="playDeshabilitado">reset</button>
+    <button mat-mini-fab (click)="reiniciarTemporizador()" [disabled]="playDeshabilitado">
+      <mat-icon>replay</mat-icon>
+    </button>
   </div>
 
-  <div class="opciones">
-    <button (click)="setValorInicial(1800); setMensajeCabecera('30 minutos')">30 minutos</button>
-    <button (click)="setValorInicial(2700); setMensajeCabecera('45 minutos')">45 minutos</button>
-    <button (click)="setValorInicial(3600); setMensajeCabecera('1 hora')">1 hora</button>
-    <button (click)="openDialogTemporizadorPersonalizado()">Personalizado</button>
+
+  <div class="contenedor-inferior">
+    <hr>
+    <div class="opciones">
+      <button mat-button (click)="openDialogTemporizadorPersonalizado()">Personalizado</button>
+      <button mat-button (click)="setValorInicial(300); setMensajeCabecera('5 minutos')">5 minutos</button>
+      <button mat-button (click)="setValorInicial(600); setMensajeCabecera('10 minutos')">10 minutos</button>
+      <button mat-button (click)="setValorInicial(1800); setMensajeCabecera('30 minutos')">30 minutos</button>
+      <button mat-button (click)="setValorInicial(2700); setMensajeCabecera('45 minutos')">45 minutos</button>
+    </div>
   </div>
 
 </div>

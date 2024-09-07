@@ -13,3 +13,8 @@ h2 {
   width: 600px;
   border-radius: 10px;
 }
+
+.feature {
+  display: flex;
+  flex-grow: 1;
+}

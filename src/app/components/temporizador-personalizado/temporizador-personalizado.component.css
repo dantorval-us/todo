@@ -1,0 +1,28 @@
+span {
+  font-weight: bold;
+  padding: 0 3px;
+}
+
+mat-dialog-content {
+  display: flex;
+  align-items: center;
+  height: 15vh;
+  padding: 1rem 1rem 0 !important;
+}
+
+mat-form-field {
+  width: 10rem;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  margin-top: auto;
+  justify-content: space-between;
+}
+
+.mat-mdc-dialog-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+}

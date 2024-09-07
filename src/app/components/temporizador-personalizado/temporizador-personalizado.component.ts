@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-const MATERIAL_MODULE = [MatDialogModule, MatFormFieldModule, MatInputModule ];
+const MATERIAL_MODULE = [MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule];
 
 @Component({
   selector: 'app-temporizador-personalizado',

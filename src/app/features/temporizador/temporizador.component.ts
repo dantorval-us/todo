@@ -1,7 +1,10 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FeatureContainerComponent } from "@components/feature-container/feature-container.component";
 import { TemporizadorPersonalizadoComponent } from '@components/temporizador-personalizado/temporizador-personalizado.component';
@@ -9,10 +12,12 @@ import { RouterOutletDataService } from '@services/router-outlet-data.service';
 import { TimeFormatPipe } from '@shared/time-format.pipe';
 import { interval, Subscription, takeWhile } from 'rxjs';
 
+const MATERIAL_MODULE = [MatButtonModule, MatIconModule];
+
 @Component({
   selector: 'app-temporizador',
   standalone: true,
-  imports: [FeatureContainerComponent, TimeFormatPipe],
+  imports: [MATERIAL_MODULE, FeatureContainerComponent, TimeFormatPipe, CommonModule],
   templateUrl: './temporizador.component.html',
   styleUrl: './temporizador.component.css'
 })

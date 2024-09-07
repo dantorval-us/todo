@@ -2,46 +2,46 @@
 
 <mat-dialog-content>
   <form [formGroup]="temporizadorForm">
-    <mat-form-field hideRequiredMarker>
+    <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
       <mat-label>Horas</mat-label>
       <input matInput type="number" formControlName="horas"/>
       @if (temporizadorForm.get('horas')?.hasError('required')) {
         <mat-error>Introduce un valor</mat-error>
       } @else if (temporizadorForm.get('horas')?.hasError('min')) {
-        <mat-error>Mínimo 0 h</mat-error>
+        <mat-error>Mínimo 0 horas</mat-error>
       } @else if (temporizadorForm.get('horas')?.hasError('max')) {
-        <mat-error>Máximo 99 h</mat-error>
+        <mat-error>Máximo 99 horas</mat-error>
       }
     </mat-form-field>
-
-    <mat-form-field hideRequiredMarker>
+    <span>:</span>
+    <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
       <mat-label>Minutos</mat-label>
       <input matInput type="number" formControlName="minutos"/>
       @if (temporizadorForm.get('minutos')?.hasError('required')) {
         <mat-error>Introduce un valor</mat-error>
       } @else if (temporizadorForm.get('minutos')?.hasError('min')) {
-        <mat-error>Mínimo 0 min</mat-error>
+        <mat-error>Mínimo 0 minutos</mat-error>
       } @else if (temporizadorForm.get('minutos')?.hasError('max')) {
-        <mat-error>Máximo 59 min</mat-error>
+        <mat-error>Máximo 59 minutos</mat-error>
       }
     </mat-form-field>
-
-    <mat-form-field hideRequiredMarker>
+    <span>:</span>
+    <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
       <mat-label>Segundos</mat-label>
       <input matInput type="number" formControlName="segundos"/>
       @if (temporizadorForm.get('segundos')?.hasError('required')) {
         <mat-error>Introduce un valor</mat-error>
       } @else if (temporizadorForm.get('segundos')?.hasError('min')) {
-        <mat-error>Mínimo 0 s</mat-error>
+        <mat-error>Mínimo 0 segundos</mat-error>
       } @else if (temporizadorForm.get('segundos')?.hasError('max')) {
-        <mat-error>Máximo 59 s</mat-error>
+        <mat-error>Máximo 59 segundos</mat-error>
       }
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancelar</button>
+<mat-dialog-actions class="mat-dialog-actions">
+  <button mat-button mat-dialog-close class="cancel-button">Cancelar</button>
   <button mat-button
     [mat-dialog-close]="temporizadorForm.value"
     [disabled]="!temporizadorForm.valid"
@@ -49,4 +49,3 @@
     Aceptar
   </button>
 </mat-dialog-actions>
-

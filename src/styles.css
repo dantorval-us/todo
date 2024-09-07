@@ -54,6 +54,10 @@ main {
   justify-content: center;
 }
 
+app-temporizador {
+  display: flex;
+}
+
 .app-container {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -95,4 +99,10 @@ main {
 .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, 
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--secondary-color) !important;
+}
+
+.mat-accent.mat-mdc-fab, 
+.mat-accent.mat-mdc-mini-fab {
+  --mdc-fab-small-container-color: var(--quaternary-color);
+  --mat-fab-small-foreground-color: var(--secondary-color);
 }
