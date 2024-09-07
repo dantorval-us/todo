@@ -8,7 +8,8 @@
 ### Funcionalidades desarrolladas hasta el momento:
 
 <ul>
-  <li>To do list.</li>
+  <li>To do list</li>
+  <li>Temporizador</li>
 </ul>
 
 
