@@ -1,0 +1,76 @@
+button {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  padding: 0.4rem 1rem !important;
+
+  .icono {
+    padding-top: 0.2rem;
+  }
+}
+
+button:hover {
+  background-color: var(--primary-color);
+}
+
+.navbar {
+  height: 100%;
+  width: 60px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: width 0.5s, padding 0.5s;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.navbar:hover {
+  width: 13rem;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: var(--quaternary-color);
+}
+
+.icono {
+  font-size: 24px;
+}
+
+.nombre {
+  margin-left: 0.7rem;
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: width 0.5s, visibility 0.5s;
+}
+
+.navbar:hover .nombre {
+  visibility: visible;
+  width: auto;
+}
+
+.cabecera {
+  color: var(--secondary-color);
+  padding-left: 1rem;
+}
+
+.features-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature {
+  cursor: pointer;
+}
