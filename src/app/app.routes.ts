@@ -15,14 +15,15 @@ export const routes: Routes = [
       },
       {
         path: 'temporizador',
-        component: TemporizadorComponent,
-        title: 'Todo | Temporizador'
+        title: 'Todo | Temporizador',
+        component: TemporizadorComponent
       }
     ]
   },
   {
     path: 'to-do-list',
-    component: TodoListComponent
+    title: 'Todo | Mis tareas',
+    component: TodoListComponent,
   },
   {
     path: '**',
