@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, deleteDoc, doc, DocumentData, DocumentReference, Firestore, orderBy, query, updateDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { Tarea } from '../interfaces/tarea';
 
 @Injectable({
@@ -9,10 +9,13 @@ import { Tarea } from '../interfaces/tarea';
 export class TareaService {
 
   private readonly _tareasCollection = collection(this._firestore, 'tareas');
+  private _tareasCache: Tarea[] | null = null;
 
   constructor(private _firestore: Firestore) { }
 
   addTarea(tarea: Partial<Tarea>): Promise<DocumentReference<DocumentData, DocumentData>> {
+    this._tareasCache = null;
+
     return addDoc(this._tareasCollection, {
       fechaCreacion: Date.now(),
       completada: false,
@@ -21,8 +24,16 @@ export class TareaService {
   }
 
   getTareas(): Observable<Tarea[]> {
+    if (this._tareasCache) {
+      return of(this._tareasCache);
+    }
+
     const q = query(this._tareasCollection, orderBy('fechaCreacion', 'asc'));
-    return collectionData(q, {idField: 'id'}) as Observable<Tarea[]>;
+    return collectionData(q, {idField: 'id'}).pipe(
+      tap((tareas: Tarea[]) => {
+        this._tareasCache = tareas;
+      })
+    ) as Observable<Tarea[]>;
   }
 
   updateTarea(tareaId: string, tarea: Tarea): void {

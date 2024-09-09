@@ -64,6 +64,7 @@ export class TodoListComponent implements OnInit {
       this._tareaService.addTarea(nuevaTarea);
     }
     this.tareasForm.reset();
+    this.getTareas();
   }
 
   private _enfocarTareasInput(): void {
