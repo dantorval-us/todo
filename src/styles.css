@@ -54,6 +54,10 @@ main {
   justify-content: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 app-temporizador {
   display: flex;
 }

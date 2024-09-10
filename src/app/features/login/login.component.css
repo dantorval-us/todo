@@ -1,0 +1,87 @@
+h3 {
+  margin-top: 3rem;
+  font-weight: 500;
+}
+
+button:hover:not(:disabled) {
+  border-color: black !important;
+  color: black !important;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.container {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 700px;
+  justify-self: center;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.1);
+}
+
+.carrusel {
+  border-radius: inherit;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 3rem 3rem;
+}
+
+.login-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  button {
+    display: inline-flex;
+    border-radius: 7px;
+    transition: all 0.2s ease-in-out;
+    padding: 8px 1.5rem;
+    column-gap: 10px;
+    align-items: center;
+    font-size: 1rem;
+    color: #6a6a6a;
+    border: 1px solid #878787;
+    background-color: transparent;
+    white-space: nowrap;
+  }
+}
+
+.todo-logo, .todo-logo img {
+  height: 1rem;
+}
+
+.logo, .logo img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.separador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.separador::before,
+.separador::after {
+  content: "";
+  height: 1px;
+  width: 40%;
+}
+
+.separador::before {
+  background: linear-gradient(to right, transparent, var(--primary-color) 50%);
+  margin-right: 5px;
+}
+
+.separador::after {
+  background: linear-gradient(to left, transparent, var(--primary-color) 50%);
+  margin-left: 5px;
+}

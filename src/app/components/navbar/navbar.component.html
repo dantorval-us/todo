@@ -5,7 +5,7 @@
 
   <div class="features-container">
     <button 
-      class="navbar-item feature"
+      class="navbar-item"
       routerLink="/to-do-list"
     >
       <span class="icono">
@@ -15,13 +15,23 @@
     </button>
   
     <button 
-      class="navbar-item feature"
+      class="navbar-item"
       routerLink="/temporizador"
     >
       <span class="icono">
         <mat-icon>hourglass_top</mat-icon>
       </span>
       <span class="nombre">Temporizador</span>
+    </button>
+
+    <button 
+      class="navbar-item btn-desconectar"
+      (click)="handleLogout()"
+    >
+      <span class="icono">
+        <mat-icon>logout</mat-icon>
+      </span>
+      <span class="nombre">Desconectar</span>
     </button>
   </div>
 

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { FeatureContainerComponent } from '@components/feature-container/feature-container.component';
 import { TodoListComponent } from '@features/todo-list/todo-list.component';
 import { TemporizadorComponent } from '@features/temporizador/temporizador.component';
@@ -16,7 +17,8 @@ export const routes: Routes = [
       {
         path: 'temporizador',
         title: 'Todo | Temporizador',
-        component: TemporizadorComponent
+        component: TemporizadorComponent,
+        ...canActivate(() => redirectUnauthorizedTo(['/login']))
       }
     ]
   },
@@ -24,6 +26,7 @@ export const routes: Routes = [
     path: 'to-do-list',
     title: 'Todo | Mis tareas',
     component: TodoListComponent,
+    ...canActivate(() => redirectUnauthorizedTo(['/login']))
   },
   {
     path: '**',
