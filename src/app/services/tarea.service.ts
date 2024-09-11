@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, deleteDoc, doc, DocumentData, DocumentReference, Firestore, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDocs, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable, of, tap } from 'rxjs';
 import { Tarea } from '../interfaces/tarea';
 import { getAuth } from '@angular/fire/auth';
@@ -52,6 +52,27 @@ export class TareaService {
   deleteTarea(tareaId: string): void {
     const tareaRef = this._getDocRef(tareaId);
     deleteDoc(tareaRef);
+  }
+
+  async deleteAllTareasUsuario(usuario: string) {
+    try {
+      if (!usuario) {
+        console.error('No se ha encontrado el usuario');
+        return;
+      }
+  
+      const tareasRef = collection(this._firestore, 'tareas');
+      const q = query(tareasRef, where('usuario', '==', usuario));
+      const querySnapshot = await getDocs(q);
+      const batchPromises = querySnapshot.docs.map((docSnapshot) => {
+        return deleteDoc(doc(this._firestore, `tareas/${docSnapshot.id}`));
+      });
+
+      await Promise.all(batchPromises);
+  
+    } catch (error) {
+      console.error('Error al eliminar las tareas del usuario:', error);
+    }
   }
 
   private _getDocRef(tareaId: string) {

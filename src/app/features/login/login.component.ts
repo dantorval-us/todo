@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
 import { CarruselComponent } from '@components/carrusel/carrusel.component';
 import { AuthService } from '@services/auth.service';
 
@@ -14,14 +13,19 @@ import { AuthService } from '@services/auth.service';
 export class LoginComponent {
 
   private readonly _authService = inject(AuthService);
-  private readonly _router = inject(Router);
 
   loginWithGoogle(): void {
     this._authService.loginWithGoogle()
-      .then(() => {
-        this._router.navigate(['/todo-list'])
-      })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        console.log('Error en autenticación con Google', error)
+      });
+  }
+
+  loginAnonymously(): void {
+    this._authService.loginAnonymously()
+      .catch((error) => {
+        console.error('Error en autenticación anónima:', error);
+      });
   }
 
 }
