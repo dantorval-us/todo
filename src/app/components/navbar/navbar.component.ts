@@ -24,7 +24,6 @@ export class NavbarComponent {
 
   handleLogout(): void {
     if (this._authService.esAnonimo()){
-      this._tareaService.deleteAllTareasUsuario(this.usuario?.uid!)
       this._authService.deleteCurrentUser();
     }
 

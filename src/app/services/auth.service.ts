@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth, signInWithPopup, GoogleAuthProvider, UserCredential, signOut, signInAnonymously, User} from '@angular/fire/auth';
+import { TareaService } from './tarea.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Auth, signInWithPopup, GoogleAuthProvider, UserCredential, signOut, sig
 export class AuthService {
 
   private readonly _auth = inject(Auth);
+  private readonly _tareaService = inject(TareaService);
 
   getCurrentUser(): User | null {
     return this._auth.currentUser;
@@ -29,6 +31,7 @@ export class AuthService {
   }
 
   deleteCurrentUser(): void {
+    this._tareaService.deleteAllTareasUsuario(this._auth.currentUser?.uid!);
     this._auth.currentUser?.delete();
   }
 
