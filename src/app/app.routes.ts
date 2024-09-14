@@ -15,18 +15,18 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'to-do-list',
+        title: 'Todo | Mis tareas',
+        component: TodoListComponent,
+        ...canActivate(() => redirectUnauthorizedTo(['/login']))
+      },
+      {
         path: 'temporizador',
         title: 'Todo | Temporizador',
         component: TemporizadorComponent,
         ...canActivate(() => redirectUnauthorizedTo(['/login']))
       }
     ]
-  },
-  {
-    path: 'to-do-list',
-    title: 'Todo | Mis tareas',
-    component: TodoListComponent,
-    ...canActivate(() => redirectUnauthorizedTo(['/login']))
   },
   {
     path: '**',
