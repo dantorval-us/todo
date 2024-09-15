@@ -1,9 +1,14 @@
 button {
   background-color: transparent;
   border: none;
-  border-radius: 20px;
   font-size: 1rem;
   padding: 0.4rem 1rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  transition: border-radius .5s, width .5s;
+  align-self: center;
 
   .icono {
     padding-top: 0.2rem;
@@ -14,9 +19,16 @@ button:hover {
   background-color: var(--primary-color);
 }
 
+hr {
+  margin: 0 0 0.5em;
+  border: none;
+  height: 1px; 
+  background: linear-gradient(to right, transparent, var(--primary-color) 20%, var(--primary-color) 80%, transparent);
+}
+
 .navbar {
   height: 100%;
-  width: 60px;
+  width: 55px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -31,8 +43,17 @@ button:hover {
 
 .navbar:hover {
   width: 13rem;
-  padding-left: 1rem;
-  padding-right: 1.5rem;
+
+  button {
+    border-radius: 5px;
+    width: 90%;
+  }
+}
+
+.features-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .navbar-item {
@@ -40,6 +61,18 @@ button:hover {
   align-items: center;
   padding: 15px;
   color: var(--quaternary-color);
+}
+
+.navbar-item.active {
+  background-color: var(--secondary-color);
+}
+
+.usuario {
+  height: 3.5rem;
+
+  .icono {
+    padding-top: 0.4rem;
+  }
 }
 
 .icono {
@@ -52,7 +85,7 @@ button:hover {
   width: 0;
   overflow: hidden;
   white-space: nowrap;
-  transition: width 0.5s, visibility 0.5s;
+  transition: width 0.5s ease, visibility 0.5s ease;
 }
 
 .navbar:hover .nombre {
@@ -60,19 +93,10 @@ button:hover {
   width: auto;
 }
 
-.cabecera {
-  color: var(--secondary-color);
-  padding-left: 1rem;
-}
-
-.features-container {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 0.5rem;
-}
-
 .btn-desconectar {
-  margin-top: auto;
   margin-bottom: .5rem;
+}
+
+.hr-desconectar {
+  margin-top: auto;
 }
