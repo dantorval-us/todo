@@ -28,7 +28,6 @@ body {
   height: 100vh;
   background-color: var(--fondo);
   overflow-x: hidden;
-  overflow-y: scroll;
 }
 
 header {
@@ -37,14 +36,6 @@ header {
   justify-content: center;
   color: var(--primary-color);
   background-color: white;
-
-  & h1 {
-    margin: 0;
-    padding: 0.5rem;
-    font-size: 1.5rem;
-    cursor: default;
-    user-select: none; 
-  }
 }
 
 main {
