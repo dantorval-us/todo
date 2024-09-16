@@ -16,7 +16,7 @@ import { filter } from 'rxjs';
 export class NavbarComponent {
 
   usuario: User | null;
-  currentRoute: string = '';
+  currentRoute: string = '/to-do-list';
 
   constructor (
     private _router: Router,
