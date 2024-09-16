@@ -26,10 +26,10 @@ export class AppComponent {
   private readonly _authService = inject(AuthService)
 
   ngOnInit() {
-    this.setIdentificdo();
+    this.setIdentificado();
   }
 
-  setIdentificdo(): void {
+  setIdentificado(): void {
     this.identificado$ = user(this._auth).pipe(
       map((user) => !!user)
     );

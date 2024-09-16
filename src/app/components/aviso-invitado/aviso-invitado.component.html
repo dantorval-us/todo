@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Aviso</h2>
+
+<mat-dialog-content>
+  <p>
+    Has entrado como Invitado, por lo tanto, tus datos desaparecerán una vez que cierres la aplicación.
+  </p>
+  <p>
+    Si deseas que tus datos sigan ahí la próxima vez que uses <strong>Todo</strong>, debes identificarte con tu cuenta de Google.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions class="mat-dialog-actions">
+  <button mat-dialog-close class="btn-login" (click)="handleLoginWithGoogle()">
+    <span class="logo">
+      <img src="assets/images/google-logo.png" alt="Google Logo">
+    </span>
+    Continuar con Google
+  </button>
+
+  <button mat-button mat-dialog-close class="cancel-button">Cerrar</button>
+</mat-dialog-actions>

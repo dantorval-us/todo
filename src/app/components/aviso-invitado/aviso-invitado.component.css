@@ -1,0 +1,29 @@
+.btn-login {
+  display: inline-flex;
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+  padding: 8px 1.5rem;
+  column-gap: 10px;
+  align-items: center;
+  font-size: 1rem;
+  color: #6a6a6a;
+  border: 1px solid #878787;
+  background-color: transparent;
+  white-space: nowrap;
+}
+
+.btn-login:hover {
+  border-color: black;
+  color: black;
+}
+
+.logo, .logo img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  margin-top: auto;
+  justify-content: space-between;
+}
