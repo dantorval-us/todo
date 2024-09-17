@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Auth, signInWithPopup, GoogleAuthProvider, UserCredential, signOut, signInAnonymously, User} from '@angular/fire/auth';
 import { TareaService } from './tarea.service';
 
@@ -8,6 +9,7 @@ import { TareaService } from './tarea.service';
 export class AuthService {
 
   private readonly _auth = inject(Auth);
+  private readonly _router = inject(Router);
   private readonly _tareaService = inject(TareaService);
 
   getCurrentUser(): User | null {
@@ -15,15 +17,27 @@ export class AuthService {
   }
 
   loginWithGoogle(): Promise<UserCredential> {
-    return signInWithPopup(this._auth, new GoogleAuthProvider());
+    return signInWithPopup(this._auth, new GoogleAuthProvider())
+      .then((credential) => {
+        this._router.navigate([''])
+        return credential;
+      });
   }
   
   loginAnonymously(): Promise<UserCredential> {
-    return signInAnonymously(this._auth);
+    return signInAnonymously(this._auth)
+      .then((credential) => {
+        this._router.navigate([''])
+        return credential;
+      });
   }
 
   logout(): Promise<void> {
-    return signOut(this._auth);
+    return signOut(this._auth)
+    .then((credential) => {
+      this._router.navigate(['/login'])
+      return credential;
+    });
   }
 
   esAnonimo(): boolean {
