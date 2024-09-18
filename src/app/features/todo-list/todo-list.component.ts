@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TareaComponent } from "@components/tarea/tarea.component";
 import { Tarea } from '@interfaces/tarea';
+import { RouterOutletDataService } from '@services/router-outlet-data.service';
 import { TareaService } from '@services/tarea.service';
 import { noWithespaceValidator } from "@shared/customValidators";
 import { tap } from 'rxjs';
@@ -34,6 +35,7 @@ export class TodoListComponent implements OnInit {
 
   @ViewChild('nombreTarea') nombreTarea!: ElementRef<HTMLInputElement>;
 
+  private readonly _routerOutletData = inject(RouterOutletDataService);
   private readonly _destroyRef = inject(DestroyRef);
 
   constructor(
@@ -42,11 +44,16 @@ export class TodoListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.emitirTitulo();
     this.getTareas();
   }
 
   ngAfterViewInit(): void {
     this._enfocarTareasInput();
+  }
+
+  emitirTitulo(): void {
+    this._routerOutletData.changeData(this.titulo);
   }
 
   getTareas():void {

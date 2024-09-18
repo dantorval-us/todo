@@ -7,6 +7,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { CustomMaterialFormsMatcher } from '@shared/customMaterialFormsMatcher';
 import { routes } from './app.routes';
 import { environment } from 'src/environments/environment';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
       useClass: CustomMaterialFormsMatcher
     }, 
     provideFirebaseApp(() => initializeApp(environment.firebase)), 
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()), 
+    provideAuth(() => getAuth())
   ]
 };

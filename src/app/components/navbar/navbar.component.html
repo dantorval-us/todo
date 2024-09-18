@@ -1,12 +1,19 @@
 <div class="navbar">
-  <div class="navbar-item cabecera">
-    <span class="icono">&#9776;</span>
-  </div>
 
   <div class="features-container">
+    <div class="navbar-item usuario">
+      <span class="icono">
+        <mat-icon>account_circle</mat-icon>
+      </span>
+      <span class="nombre">{{ (usuario?.displayName | primeraPalabra) || 'Invitado' }}</span>
+    </div>
+
+    <hr>
+
     <button 
-      class="navbar-item feature"
+      class="navbar-item"
       routerLink="/to-do-list"
+      [class.active]="currentRoute === '/to-do-list'"
     >
       <span class="icono">
         <mat-icon>checklist</mat-icon>
@@ -15,13 +22,26 @@
     </button>
   
     <button 
-      class="navbar-item feature"
+      class="navbar-item"
       routerLink="/temporizador"
+      [class.active]="currentRoute === '/temporizador'"
     >
       <span class="icono">
         <mat-icon>hourglass_top</mat-icon>
       </span>
       <span class="nombre">Temporizador</span>
+    </button>
+
+    <hr class="hr-desconectar">
+
+    <button 
+      class="navbar-item btn-desconectar"
+      (click)="handleLogout()"
+    >
+      <span class="icono">
+        <mat-icon>logout</mat-icon>
+      </span>
+      <span class="nombre">Desconectar</span>
     </button>
   </div>
 

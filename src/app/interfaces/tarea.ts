@@ -5,4 +5,5 @@ export interface Tarea {
   nombre: string;
   completada: boolean;
   fechaCreacion: Timestamp;
+  usuario: string;
 }

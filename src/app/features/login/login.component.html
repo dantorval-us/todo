@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="carrusel">
+    <app-carrusel />
+  </div>
+
+  <div class="login">
+
+    <span class="todo-logo">
+      <img src="assets/images/logo-no-background.png" alt="TODO logo">
+    </span>
+
+    <h3>Acceder</h3>
+
+    <div class="login-options">
+
+      <button (click)="loginWithGoogle()">
+        <span class="logo">
+          <img src="assets/images/google-logo.png" alt="Google Logo">
+        </span>
+        Continuar con Google
+      </button>
+
+      <!-- <button disabled>
+        <span class="logo">
+          <img src="assets/images/github-logo.png" alt="GitHub Logo">
+        </span>
+        Continuar con GitHub
+      </button> -->
+
+      <span class="separador">o</span>
+
+      <button (click)="loginAnonymously()">
+        <span class="logo"><mat-icon>account_circle</mat-icon></span>
+        Continuar como invitado
+      </button>
+    </div>
+
+  </div>
+
+</div>
