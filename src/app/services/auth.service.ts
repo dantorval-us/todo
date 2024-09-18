@@ -35,7 +35,8 @@ export class AuthService {
   logout(): Promise<void> {
     return signOut(this._auth)
     .then((credential) => {
-      this._router.navigate(['/login'])
+      this._tareaService.limpiaCache();
+      this._router.navigate(['/login']);
       return credential;
     });
   }

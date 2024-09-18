@@ -78,6 +78,10 @@ export class TareaService {
     }
   }
 
+  limpiaCache(): void {
+    this._tareasCache = null;
+  }
+
   private _getDocRef(tareaId: string) {
     return doc(this._firestore, 'tareas', tareaId);
   }
