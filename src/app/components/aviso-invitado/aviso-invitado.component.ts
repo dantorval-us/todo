@@ -18,6 +18,7 @@ export class AvisoInvitadoComponent {
 
   handleLoginWithGoogle(): void {
     this._authService.deleteCurrentUser();
+    this._authService.logout();
     this._authService.loginWithGoogle();
   }
 
