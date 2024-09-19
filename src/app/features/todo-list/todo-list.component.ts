@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TareaComponent } from "@components/tarea/tarea.component";
 import { Tarea } from '@interfaces/tarea';
@@ -13,21 +14,28 @@ import { RouterOutletDataService } from '@services/router-outlet-data.service';
 import { TareaService } from '@services/tarea.service';
 import { noWithespaceValidator } from "@shared/customValidators";
 import { tap } from 'rxjs';
+import { customMatPaginatorIntl } from '@shared/customMatPaginatorIntl';
 
 const MATERIAL_MODULE = [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, 
-  MatIconModule, MatButtonModule, MatProgressSpinnerModule];
+  MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule];
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
   imports: [UpperCasePipe, MATERIAL_MODULE, TareaComponent],
+  providers: [{provide: MatPaginatorIntl, useClass: customMatPaginatorIntl}],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent implements OnInit {
 
   titulo: string = "Mis tareas";
-  tareas!: Tarea[];
+  tareas: Tarea[] = [];
+  tareasPaginadas: Tarea[] = [];
+  totalTareas = 0;
+  tareasPorPagina = [5, 10, 20, 50]
+  tamanioPagina = 5;
+  paginaInicial = 0;
 
   tareasForm = this._formBuilder.nonNullable.group({
     nombre: ['', [Validators.required, noWithespaceValidator()]],
@@ -50,6 +58,7 @@ export class TodoListComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this._enfocarTareasInput();
+    this.paginaTareas();
   }
 
   emitirTitulo(): void {
@@ -62,7 +71,22 @@ export class TodoListComponent implements OnInit {
         takeUntilDestroyed(this._destroyRef),
         tap((tareas: Tarea[]) => this.tareas = tareas)
       )
-      .subscribe()
+      .subscribe((tareas) => {
+        this.totalTareas = tareas.length;
+        this.paginaTareas();
+      });
+  }
+
+  pageEvent(event: PageEvent) {
+    this.tamanioPagina = event.pageSize;
+    this.paginaInicial = event.pageIndex;
+    this.paginaTareas();
+  }
+
+  paginaTareas() {
+    const startIndex = this.paginaInicial * this.tamanioPagina;
+    const endIndex = startIndex + this.tamanioPagina;
+    this.tareasPaginadas = this.tareas.slice(startIndex, endIndex);
   }
 
   handleSubmit(): void {

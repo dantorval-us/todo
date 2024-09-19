@@ -21,7 +21,7 @@
   </form>
 
   @defer {
-    @for (tarea of tareas; track tarea.id) {
+    @for (tarea of tareasPaginadas; track tarea.id) {
       <app-tarea 
         [tarea]="tarea"
         class="tarea"
@@ -36,6 +36,16 @@
       <mat-spinner></mat-spinner>
     </div>
   }
+
+  <div class="separador"></div>
+
+  <mat-paginator [length]="totalTareas" 
+    [pageSize]="tamanioPagina" 
+    [pageSizeOptions]="tareasPorPagina" 
+    showFirstLastButtons 
+    (page)="pageEvent($event)"
+  >
+  </mat-paginator>
 
 </div>
 

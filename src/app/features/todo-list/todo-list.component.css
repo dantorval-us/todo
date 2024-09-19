@@ -1,4 +1,5 @@
 .container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,11 +22,17 @@
 }
 
 .spinner-container {
-  margin-top: auto;
-  margin-bottom: auto; 
-  padding-bottom: 10vh;
+  margin: auto 0;
+}
+
+.separador {
+  height: 5px;
 }
 
 mat-spinner {
   width: 50px !important;
+}
+
+mat-paginator {
+  margin-top: auto;
 }
