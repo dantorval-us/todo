@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TareaComponent } from "@components/tarea/tarea.component";
 import { Tarea } from '@interfaces/tarea';
@@ -41,6 +41,7 @@ export class TodoListComponent implements OnInit {
     nombre: ['', [Validators.required, noWithespaceValidator()]],
   });
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('nombreTarea') nombreTarea!: ElementRef<HTMLInputElement>;
 
   private readonly _routerOutletData = inject(RouterOutletDataService);
@@ -87,6 +88,10 @@ export class TodoListComponent implements OnInit {
     const startIndex = this.paginaInicial * this.tamanioPagina;
     const endIndex = startIndex + this.tamanioPagina;
     this.tareasPaginadas = this.tareas.slice(startIndex, endIndex);
+
+    if (this.tareasPaginadas.length === 0 && this.paginator.hasPreviousPage()) {
+      this.paginator.previousPage();
+    }
   }
 
   handleSubmit(): void {
@@ -96,6 +101,12 @@ export class TodoListComponent implements OnInit {
     }
     this.tareasForm.reset();
     this.getTareas();
+
+    if (this.totalTareas + 1 > ((this.paginaInicial + 1) * this.tamanioPagina)) {
+      setTimeout(() => {
+        this.paginator.lastPage();
+      }, 100);
+    }
   }
 
   private _enfocarTareasInput(): void {
