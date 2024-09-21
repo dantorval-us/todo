@@ -1,8 +1,9 @@
 import { Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UpperCasePipe } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -17,7 +18,7 @@ import { tap } from 'rxjs';
 import { customMatPaginatorIntl } from '@shared/customMatPaginatorIntl';
 
 const MATERIAL_MODULE = [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, 
-  MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule];
+  MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule, MatButtonToggleModule];
 
 @Component({
   selector: 'app-todo-list',
@@ -41,6 +42,8 @@ export class TodoListComponent implements OnInit {
     nombre: ['', [Validators.required, noWithespaceValidator()]],
   });
 
+  tareasMostradasControl = new FormControl('todas');
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('nombreTarea') nombreTarea!: ElementRef<HTMLInputElement>;
 
@@ -51,6 +54,16 @@ export class TodoListComponent implements OnInit {
     private _tareaService: TareaService,
     private _formBuilder: FormBuilder
   ) {}
+
+  get tareasFiltradas() {
+    const filtros: { [key: string]: () => any[] } = {
+      'completadas': () => this.tareas.filter(tarea => tarea.completada),
+      'incompletas': () => this.tareas.filter(tarea => !tarea.completada),
+      'todas': () => this.tareas
+    };
+  
+    return filtros[this.tareasMostradasControl.value ?? 'todas']();
+  }
 
   ngOnInit(): void {
     this.emitirTitulo();
@@ -87,7 +100,8 @@ export class TodoListComponent implements OnInit {
   paginaTareas() {
     const startIndex = this.paginaInicial * this.tamanioPagina;
     const endIndex = startIndex + this.tamanioPagina;
-    this.tareasPaginadas = this.tareas.slice(startIndex, endIndex);
+    this.tareasPaginadas = this.tareasFiltradas.slice(startIndex, endIndex);
+    this.totalTareas = this.tareasFiltradas.length;
 
     if (this.tareasPaginadas.length === 0 && this.paginator.hasPreviousPage()) {
       this.paginator.previousPage();

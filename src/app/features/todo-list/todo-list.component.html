@@ -20,6 +20,16 @@
     </mat-form-field>
   </form>
 
+  <div class="opciones-conainer">
+    <div class="filter-container">
+      <mat-button-toggle-group (click)="paginaTareas()" [formControl]="tareasMostradasControl" hideSingleSelectionIndicator>
+        <mat-button-toggle value="todas">Todas</mat-button-toggle>
+        <mat-button-toggle value="completadas">Completadas</mat-button-toggle>
+        <mat-button-toggle value="incompletas">Incompletas</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
   @defer {
     @for (tarea of tareasPaginadas; track tarea.id) {
       <app-tarea 
