@@ -16,10 +16,11 @@ import { TareaService } from '@services/tarea.service';
 import { noWithespaceValidator } from "@shared/customValidators";
 import { tap } from 'rxjs';
 import { customMatPaginatorIntl } from '@shared/customMatPaginatorIntl';
+import { MatSelectModule } from '@angular/material/select';
 
 const MATERIAL_MODULE = [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, 
-  MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule, MatButtonToggleModule];
-
+  MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule, MatButtonToggleModule,
+  MatSelectModule];
 @Component({
   selector: 'app-todo-list',
   standalone: true,
@@ -43,6 +44,7 @@ export class TodoListComponent implements OnInit {
   });
 
   tareasMostradasControl = new FormControl('todas');
+  tareasOrdenadasControl = new FormControl('creciente');
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('nombreTarea') nombreTarea!: ElementRef<HTMLInputElement>;
@@ -63,6 +65,14 @@ export class TodoListComponent implements OnInit {
     };
   
     return filtros[this.tareasMostradasControl.value ?? 'todas']();
+  }
+
+  get tareasOrdenadas() {
+    const orden = this.tareasOrdenadasControl.value;
+  
+    return this.tareasFiltradas.slice().sort((a, b) => {
+      return orden === 'creciente' ? a.fechaCreacion - b.fechaCreacion : b.fechaCreacion - a.fechaCreacion;
+    });
   }
 
   ngOnInit(): void {
@@ -100,7 +110,7 @@ export class TodoListComponent implements OnInit {
   paginaTareas() {
     const startIndex = this.paginaInicial * this.tamanioPagina;
     const endIndex = startIndex + this.tamanioPagina;
-    this.tareasPaginadas = this.tareasFiltradas.slice(startIndex, endIndex);
+    this.tareasPaginadas = this.tareasOrdenadas.slice(startIndex, endIndex);
     this.totalTareas = this.tareasFiltradas.length;
 
     if (this.tareasPaginadas.length === 0 && this.paginator.hasPreviousPage()) {
@@ -116,10 +126,14 @@ export class TodoListComponent implements OnInit {
     this.tareasForm.reset();
     this.getTareas();
 
-    if (this.totalTareas + 1 > ((this.paginaInicial + 1) * this.tamanioPagina)) {
+    if (this.tareasOrdenadasControl.value == 'creciente' 
+        && this.totalTareas + 1 > ((this.paginaInicial + 1) * this.tamanioPagina)) {
       setTimeout(() => {
         this.paginator.lastPage();
       }, 100);
+    
+    } else if (this.tareasOrdenadasControl.value == 'decreciente') {
+      this.paginator.firstPage();
     }
   }
 

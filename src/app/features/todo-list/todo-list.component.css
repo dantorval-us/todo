@@ -10,7 +10,17 @@
 }
 
 .opciones-conainer {
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  .orden-container {
+    width: 35%;
+  
+    .mat-mdc-form-field {
+      width: 100%;
+    }
+  }
 }
 
 .tarea {
@@ -43,4 +53,11 @@ mat-paginator {
  
 .mat-button-toggle-group-appearance-standard {
   border-radius: 5px;
+}
+
+
+
+.mdc-text-field--outlined .mat-mdc-form-field-infix, 
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 0 !important;
 }
