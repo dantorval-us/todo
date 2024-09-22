@@ -21,22 +21,44 @@
   </form>
 
   <div class="opciones-conainer">
-    <div class="filter-container">
-      <mat-button-toggle-group (click)="paginaTareas()" [formControl]="tareasMostradasControl" hideSingleSelectionIndicator>
-        <mat-button-toggle value="todas">Todas</mat-button-toggle>
-        <mat-button-toggle value="completadas">Completadas</mat-button-toggle>
-        <mat-button-toggle value="incompletas">Incompletas</mat-button-toggle>
-      </mat-button-toggle-group>
+
+    <div class="primer-par">
+      <div class="filter-container">
+        <mat-button-toggle-group (click)="paginaTareas()" [formControl]="tareasMostradasControl" hideSingleSelectionIndicator>
+          <mat-button-toggle value="todas">Todas</mat-button-toggle>
+          <mat-button-toggle value="completadas">Completadas</mat-button-toggle>
+          <mat-button-toggle value="incompletas">Incompletas</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+  
+      <div class="orden-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Orden</mat-label>
+          <mat-select [formControl]="tareasOrdenadasControl" (selectionChange)="paginaTareas()">
+            <mat-option value="decreciente">Más recientes</mat-option>
+            <mat-option value="creciente">Más antiguas</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
-    <div class="orden-container">
-      <mat-form-field appearance="outline">
-        <mat-label>Orden</mat-label>
-        <mat-select [formControl]="tareasOrdenadasControl" (selectionChange)="paginaTareas()">
-          <mat-option value="decreciente">Más recientes</mat-option>
-          <mat-option value="creciente">Más antiguas</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="eliminar-container">
+      <button 
+        mat-icon-button 
+        [matMenuTriggerFor]="menuEliminar" 
+        matTooltip="Eliminación múltiple"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <mat-menu #menuEliminar="matMenu" xPosition="before">
+        <button mat-menu-item (click)="deleteTareasCompletadas()">
+          <span>Eliminar completadas</span>
+        </button>
+        <button mat-menu-item (click)="deleteTareasTodas()">
+          <span>Eliminar todas</span>
+          <mat-icon>warning</mat-icon>
+        </button>
+      </mat-menu>
     </div>
   </div>
 

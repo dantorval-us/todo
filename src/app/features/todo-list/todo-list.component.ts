@@ -7,8 +7,11 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TareaComponent } from "@components/tarea/tarea.component";
 import { Tarea } from '@interfaces/tarea';
 import { RouterOutletDataService } from '@services/router-outlet-data.service';
@@ -16,11 +19,10 @@ import { TareaService } from '@services/tarea.service';
 import { noWithespaceValidator } from "@shared/customValidators";
 import { tap } from 'rxjs';
 import { customMatPaginatorIntl } from '@shared/customMatPaginatorIntl';
-import { MatSelectModule } from '@angular/material/select';
 
 const MATERIAL_MODULE = [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, 
   MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule, MatButtonToggleModule,
-  MatSelectModule];
+  MatSelectModule, MatMenuModule, MatTooltipModule];
 @Component({
   selector: 'app-todo-list',
   standalone: true,
@@ -99,6 +101,14 @@ export class TodoListComponent implements OnInit {
         this.totalTareas = tareas.length;
         this.paginaTareas();
       });
+  }
+
+  deleteTareasCompletadas(): void {
+    this._tareaService.deleteTareasCompletadas();
+  }
+
+  deleteTareasTodas(): void {
+    this._tareaService.deleteTodasTareas();
   }
 
   pageEvent(event: PageEvent) {

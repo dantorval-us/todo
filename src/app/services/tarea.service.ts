@@ -57,6 +57,24 @@ export class TareaService {
     deleteDoc(tareaRef);
   }
 
+  async deleteTareasCompletadas() {
+    const q = query(this._tareasCollection, where('usuario', '==', this._auth), where('completada', '==', true))
+    const querySnapshot = await getDocs(q);
+    const batchPromises = querySnapshot.docs.map((docSnapshot) => {
+      return deleteDoc(doc(this._firestore, `tareas/${docSnapshot.id}`));
+    });
+    await Promise.all(batchPromises);
+  }
+
+  async deleteTodasTareas() {
+    const q = query(this._tareasCollection, where('usuario', '==', this._auth))
+    const querySnapshot = await getDocs(q);
+    const batchPromises = querySnapshot.docs.map((docSnapshot) => {
+      return deleteDoc(doc(this._firestore, `tareas/${docSnapshot.id}`));
+    });
+    await Promise.all(batchPromises);
+  }
+
   async deleteAllTareasUsuario(usuario: string) {
     try {
       if (!usuario) {

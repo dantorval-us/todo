@@ -113,3 +113,7 @@ app-temporizador {
 .mat-mdc-form-field-infix {
   min-height: 0 !important;
 }
+
+.mat-mdc-paginator-container {
+  justify-content: space-between !important;
+}
