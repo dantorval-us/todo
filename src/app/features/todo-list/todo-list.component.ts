@@ -62,7 +62,7 @@ export class TodoListComponent implements OnInit {
   get tareasFiltradas() {
     const filtros: { [key: string]: () => any[] } = {
       'completadas': () => this.tareas.filter(tarea => tarea.completada),
-      'incompletas': () => this.tareas.filter(tarea => !tarea.completada),
+      'pendietes': () => this.tareas.filter(tarea => !tarea.completada),
       'todas': () => this.tareas
     };
   

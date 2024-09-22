@@ -26,8 +26,8 @@
       <div class="filter-container">
         <mat-button-toggle-group (click)="paginaTareas()" [formControl]="tareasMostradasControl" hideSingleSelectionIndicator>
           <mat-button-toggle value="todas">Todas</mat-button-toggle>
+          <mat-button-toggle value="pendietes">Pendientes</mat-button-toggle>
           <mat-button-toggle value="completadas">Completadas</mat-button-toggle>
-          <mat-button-toggle value="incompletas">Incompletas</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
   
@@ -35,8 +35,8 @@
         <mat-form-field appearance="outline">
           <mat-label>Orden</mat-label>
           <mat-select [formControl]="tareasOrdenadasControl" (selectionChange)="paginaTareas()">
-            <mat-option value="decreciente">Más recientes</mat-option>
             <mat-option value="creciente">Más antiguas</mat-option>
+            <mat-option value="decreciente">Más recientes</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
