@@ -82,8 +82,7 @@ export class TareaService {
         return;
       }
   
-      const tareasRef = collection(this._firestore, 'tareas');
-      const q = query(tareasRef, where('usuario', '==', usuario));
+      const q = query(this._tareasCollection, where('usuario', '==', usuario));
       const querySnapshot = await getDocs(q);
       const batchPromises = querySnapshot.docs.map((docSnapshot) => {
         return deleteDoc(doc(this._firestore, `tareas/${docSnapshot.id}`));
