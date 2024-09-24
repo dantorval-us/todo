@@ -12,27 +12,27 @@ const redirectUnauthorized = () => redirectUnauthorizedTo(['/login']);
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    loadComponent: () => import('@features/login/login.component').then(c => c.LoginComponent),
     ...canActivate(redirectLogged)
   },
   {
     path: '',
-    component: MainLayoutComponent,
+    loadComponent: () => import('@components/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
     ...canActivate(redirectUnauthorized),
     children: [
       {
         path: '',
-        component: FeatureContainerComponent,
+        loadComponent: () => import('@components/feature-container/feature-container.component').then(c => c.FeatureContainerComponent),
         children: [
           {
             path: 'to-do-list',
             title: 'Todo | Mis tareas',
-            component: TodoListComponent,
+            loadComponent: () => import('@features/todo-list/todo-list.component').then(c => c.TodoListComponent)
           },
           {
             path: 'temporizador',
             title: 'Todo | Temporizador',
-            component: TemporizadorComponent,
+            loadComponent: () => import('@features/temporizador/temporizador.component').then(c => c.TemporizadorComponent)
           },
           {
             path: '',

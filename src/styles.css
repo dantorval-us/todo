@@ -101,3 +101,19 @@ app-temporizador {
   --mdc-fab-small-container-color: var(--quaternary-color);
   --mat-fab-small-foreground-color: var(--secondary-color);
 }
+
+
+/* Todo-list */
+.orden-container :not(.mdc-text-field--outlined .mat-mdc-form-field-infix), 
+.orden-container :not(.mdc-text-field--no-label .mat-mdc-form-field-infix) {
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 0 !important;
+}
+
+.mat-mdc-paginator-container {
+  justify-content: space-between !important;
+}
