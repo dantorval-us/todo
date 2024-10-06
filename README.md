@@ -12,6 +12,16 @@
   <li>Temporizador</li>
 </ul>
 
+Una muestra de ello:
+<br><br>
+<img src="https://github.com/dantorval-us/todo/blob/main/src/assets/images/readme/todo-list.jpg" width="800" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br>
+<img src="https://github.com/dantorval-us/todo/blob/main/src/assets/images/readme/temporizador.jpg" width="800" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br>
+<img src="https://github.com/dantorval-us/todo/blob/main/src/assets/images/readme/login.jpg" width="800" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br>
+<img src="https://github.com/dantorval-us/todo/blob/main/src/assets/images/readme/demo.gif" width="800" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
 ## ¡Pruébelo!
 
